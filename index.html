@@ -965,6 +965,7 @@
     <input type="password" id="api-key-input" placeholder="sk-ant-..." autocomplete="off" />
     <button class="modal-btn" onclick="saveApiKey()">Start with RubyX</button>
     <div class="modal-note">Get your key at console.anthropic.com → API Keys</div>
+    <button class="modal-btn" onclick="clearApiKey()" style="background:transparent;border:1px solid rgba(240,107,160,0.3);color:var(--text2);margin-top:8px;font-size:13px;">🗑 Clear saved key</button>
   </div>
 </div>
 
@@ -1192,6 +1193,7 @@
   <button class="mobile-tab" onclick="switchView('dashboard')"><span class="mobile-tab-icon">📊</span>Today</button>
   <button class="mobile-tab" onclick="switchView('goals')"><span class="mobile-tab-icon">🎯</span>Goals</button>
   <button class="mobile-tab" onclick="switchView('notes')"><span class="mobile-tab-icon">📝</span>Notes</button>
+  <button class="mobile-tab" onclick="openSettings()"><span class="mobile-tab-icon">⚙️</span>Settings</button>
 </nav>
 
 <script>
@@ -1266,6 +1268,13 @@ function clearApiKey() {
     localStorage.removeItem('rubyx_api_key');
     location.reload();
   }
+}
+
+function openSettings() {
+  const modal = document.getElementById('api-modal');
+  // Pre-fill with existing key if present
+  if (apiKey) document.getElementById('api-key-input').value = apiKey;
+  modal.style.display = 'flex';
 }
 
 if (apiKey) document.getElementById('api-modal').style.display = 'none';
